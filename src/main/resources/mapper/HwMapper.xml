@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hd.bishe.dao.HwDao">
+	<!-- 商品列表 -->
+	<select id="sp" parameterType="hd.bishe.pojo.Hw" resultType="map">
+	select * from hw where sj=#{sj} and sh=#{sh}
+	<if test="name != null">
+	and name like "%"#{name}"%"
+	</if>
+	</select>
+	
+	<!-- 商品上下架信息 -->
+	<update id="spxj" parameterType="hd.bishe.pojo.Hw" >
+	update hw set date=#{date},sj=#{sj},sh=#{sh} where id=#{id}
+	</update>
+	
+	<!-- 新建入库单 -->
+	<insert id="xjrk" parameterType="hd.bishe.pojo.Hw">
+	insert into hw(name,number,money,phone,gy,date,sj,sh,zrr) value(#{name},#{number},#{money},#{phone},#{gy},#{date},#{sj},#{sh},#{zrr})
+	</insert>
+	
+	<select id="dy" parameterType="int"  resultType="hd.bishe.pojo.Hw">
+	select * from hw where id=#{id}
+	</select>
+	
+	<select id="dys" parameterType="String"  resultType="hd.bishe.pojo.Hw">
+	select * from hw where name=#{name}
+	</select>
+	
+	<!-- 商品上下架信息 -->
+	<update id="ckkk" parameterType="hd.bishe.pojo.Hw" >
+	update hw set date=#{date},number=#{number} where name=#{name}
+	</update>
+	
+	<delete id="jj" parameterType="int">
+		delete from hw where id=#{id}
+	</delete>
+	
+	<update id="updateHw" parameterType="hd.bishe.pojo.Hw" >
+	update hw set date=#{date},number=#{number},name=#{name},money=#{money},gy=#{gy},phone=#{phone} where id=#{id}
+	</update>
+	
+</mapper>
